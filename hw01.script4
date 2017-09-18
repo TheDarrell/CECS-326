@@ -1,0 +1,30 @@
+#!/bin/bash -f
+#
+# Darrell Theng
+# CECS 326
+# HW1 Script 1
+# Add title, header to data
+# Sort by RBI descending, then AB ascending
+# For the top players($1) of specified league($2)
+# with input error checking
+#
+
+if (("$#" != 2))
+then
+	echo 'Wrong amount of arguments. Only 2 after script!'
+elif (($1 < 1))
+then
+	echo '2nd arg must be postive integer greater than 0'
+elif [ $2 = "AL" ] || [ $2 = "NL" ]
+then
+	printf '\n'
+	echo 'Top' $1 'from league' $2
+	echo -e 'Sorted Baseball Players Highest RBI, then lowest AB\n'
+	cat hw01.headers
+	awk '$2 == a' a="$2" hw01.data | sort -k11,11nr -k5,5n | head -$1
+	printf '\n'
+else
+	echo '3rd arg must be AL or NL'
+fi
+
+
